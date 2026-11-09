@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Login | Dance Studio</title>
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+
+            <h2>Dance Studio</h2>
+
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <main class="auth-page">
+
+        <section class="auth-container">
+
+            <h1>Login</h1>
+
+            <p>
+                Login to access your Dance Studio account.
+            </p>
+
+
+            <form onsubmit="loginUser(event)">
+
+                <div>
+
+                    <label for="email">Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="password">Password</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="forgot-link">
+                    <a href="forgot-password.html">Forgot password?</a>
+                </div>
+
+
+                <button type="submit">Login</button>
+
+            </form>
+
+
+            <!-- Remove this box before sharing the project publicly -->
+            <details class="demo-accounts">
+
+                <summary>Demo accounts</summary>
+
+                <p><strong>Admin:</strong> admin@dance.com / admin123</p>
+                <p><strong>Instructor:</strong> alex@dance.com / alex123</p>
+                <p><strong>Instructor:</strong> sarah@dance.com / sarah123</p>
+                <p><strong>Instructor:</strong> rahul@dance.com / rahul123</p>
+                <p><strong>Student:</strong> aarav@example.com / student123</p>
+
+            </details>
+
+
+            <p>
+                Don't have an account?
+                <a href="register.html">Create an account</a>
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            &copy; 2026 Dance Studio Management System
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

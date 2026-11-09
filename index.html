@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Dance Studio Management</title>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <h2>Dance Studio</h2>
+
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#classes">Classes</a></li>
+
+                <li class="guest-only"><a href="login.html">Login</a></li>
+                <li class="guest-only"><a href="register.html">Register</a></li>
+
+                <li class="user-only" hidden>
+                    <a href="login.html" class="dashboard-link">Dashboard</a>
+                </li>
+                <li class="user-only" hidden>
+                    <a href="#" onclick="logoutUser()">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+
+            <h1>Welcome to Dance Studio</h1>
+
+            <p>
+                Manage dance classes, registrations, schedules,
+                instructors and students in one centralized system.
+            </p>
+
+            <div>
+                <a href="register.html" class="btn guest-only">Join Now</a>
+                <a href="login.html" class="btn guest-only">Login</a>
+                <a href="login.html" class="btn user-only dashboard-link" hidden>Go to Dashboard</a>
+            </div>
+
+        </section>
+
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+
+            <h2>About Our Studio</h2>
+
+            <p>
+                Our Dance Studio Management System provides a
+                centralized platform for managing students,
+                instructors, dance classes and registrations.
+            </p>
+
+        </section>
+
+
+        <!-- Classes Section (built from the real classes) -->
+        <section id="classes" class="classes-section">
+
+            <h2>Our Dance Classes</h2>
+
+            <div id="homeClasses" class="home-class-grid">
+                <!-- JavaScript adds the classes here -->
+            </div>
+
+        </section>
+
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+
+            <h2>What Our System Provides</h2>
+
+            <ul>
+                <li>Student Registration</li>
+                <li>Dance Class Management</li>
+                <li>Class Registration</li>
+                <li>Schedule Management</li>
+                <li>Booking Status Tracking</li>
+                <li>Notifications</li>
+                <li>Reports for Admins</li>
+            </ul>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            &copy; 2026 Dance Studio Management System
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/home.js"></script>
+
+</body>
+
+</html>

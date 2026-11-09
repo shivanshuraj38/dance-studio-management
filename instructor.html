@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Instructor Dashboard | Dance Studio</title>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <nav>
+
+        <h2>Dance Studio</h2>
+
+        <ul>
+            <li><a href="instructor.html">Dashboard</a></li>
+            <li><a href="#classes">My Classes</a></li>
+            <li><a href="#students">Students</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li>
+                <a href="#notifications">
+                    Notifications
+                    <span id="notificationBadge" class="count-badge" hidden></span>
+                </a>
+            </li>
+            <li><a href="change-password.html">Change Password</a></li>
+            <li><a href="#" onclick="logoutUser()">Logout</a></li>
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<main class="dashboard-page">
+
+
+    <!-- HEADER -->
+
+    <section class="dashboard-header">
+
+        <h1>
+            Welcome, <span id="instructorName">Instructor</span>!
+        </h1>
+
+        <p>
+            Manage your assigned dance classes and
+            view registered students.
+        </p>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats-section">
+
+        <h2>My Overview</h2>
+
+        <div class="stats-grid">
+
+            <div>
+                <h3 id="statClasses">0</h3>
+                <p>Assigned Classes</p>
+            </div>
+
+            <div>
+                <h3 id="statStudents">0</h3>
+                <p>Enrolled Students</p>
+            </div>
+
+            <div>
+                <h3 id="statPending">0</h3>
+                <p>Pending Requests</p>
+            </div>
+
+            <div>
+                <h3 id="statNotifications">0</h3>
+                <p>Unread Notifications</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MY CLASSES -->
+
+    <section id="classes">
+
+        <h2>My Classes</h2>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Class Name</th>
+                        <th>Style</th>
+                        <th>Level</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Seats</th>
+                    </tr>
+                </thead>
+
+                <tbody id="instructorClassTable">
+                    <!-- JavaScript adds classes here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- REGISTERED STUDENTS -->
+
+    <section id="students">
+
+        <h2>Registered Students</h2>
+
+        <div class="toolbar">
+
+            <div>
+                <label for="studentSearch">Search</label>
+                <input
+                    type="search"
+                    id="studentSearch"
+                    placeholder="Search by name, email, class..."
+                    oninput="renderInstructorStudents()"
+                >
+            </div>
+
+            <div>
+                <label for="studentClassFilter">Class</label>
+                <select id="studentClassFilter" onchange="renderInstructorStudents()">
+                    <option value="">All My Classes</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="studentStatusFilter">Status</label>
+                <select id="studentStatusFilter" onchange="renderInstructorStudents()">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Class</th>
+                        <th>Registration Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="instructorStudentTable">
+                    <!-- JavaScript adds students here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- SCHEDULE -->
+
+    <section id="schedule">
+
+        <h2>My Weekly Schedule</h2>
+
+        <div>
+            <ul id="scheduleList">
+                <!-- JavaScript adds scheduled classes here -->
+            </ul>
+        </div>
+
+    </section>
+
+
+    <!-- NOTIFICATIONS -->
+
+    <section id="notifications">
+
+        <h2>Notifications</h2>
+
+        <div class="notification-list">
+
+            <button type="button" class="btn-small btn-secondary" onclick="handleMarkAllRead()">
+                Mark all as read
+            </button>
+
+            <div id="notificationList">
+                <!-- JavaScript adds notifications here -->
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <p>&copy; 2026 Dance Studio Management System</p>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/instructor.js"></script>
+
+<script>
+
+    if (protectPage("instructor")) {
+
+        displayUserName("instructorName");
+
+        initializeInstructorDashboard();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

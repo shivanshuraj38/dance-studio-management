@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Admin Dashboard | Dance Studio</title>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <nav>
+
+        <h2>Dance Studio</h2>
+
+        <ul>
+            <li><a href="admin.html">Dashboard</a></li>
+            <li><a href="#users">Users</a></li>
+            <li><a href="#classes">Classes</a></li>
+            <li><a href="#registrations">Registrations</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li>
+                <a href="#notifications">
+                    Notifications
+                    <span id="notificationBadge" class="count-badge" hidden></span>
+                </a>
+            </li>
+            <li><a href="change-password.html">Change Password</a></li>
+            <li><a href="#" onclick="logoutUser()">Logout</a></li>
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<main class="dashboard-page">
+
+
+    <!-- HEADER -->
+
+    <section class="dashboard-header">
+
+        <h1>Admin Dashboard</h1>
+
+        <p>
+            Manage users, classes, registrations and studio operations.
+        </p>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats-section">
+
+        <h2>Studio Overview</h2>
+
+        <div class="stats-grid">
+
+            <div>
+                <h3 id="statStudents">0</h3>
+                <p>Total Students</p>
+            </div>
+
+            <div>
+                <h3 id="statInstructors">0</h3>
+                <p>Instructors</p>
+            </div>
+
+            <div>
+                <h3 id="statClasses">0</h3>
+                <p>Active Classes</p>
+            </div>
+
+            <div>
+                <h3 id="statPending">0</h3>
+                <p>Pending Registrations</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- USERS -->
+
+    <section id="users">
+
+        <h2>User Management</h2>
+
+        <div class="toolbar">
+
+            <div>
+                <label for="userSearch">Search</label>
+                <input
+                    type="search"
+                    id="userSearch"
+                    placeholder="Search by name or email..."
+                    oninput="renderUsers()"
+                >
+            </div>
+
+            <div>
+                <label for="userRoleFilter">Role</label>
+                <select id="userRoleFilter" onchange="renderUsers()">
+                    <option value="">All Roles</option>
+                    <option value="student">Student</option>
+                    <option value="instructor">Instructor</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="adminUserTable">
+                    <!-- JavaScript adds users here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- CLASS MANAGEMENT -->
+
+    <section id="classes">
+
+        <h2>Class Management</h2>
+
+        <!-- ADD / EDIT CLASS FORM -->
+
+        <div class="class-form" id="classFormBox">
+
+            <h3 id="classFormTitle">Add New Dance Class</h3>
+
+            <div class="form-grid">
+
+                <div>
+                    <label for="className">Class Name</label>
+                    <input type="text" id="className" placeholder="Example: Salsa Beginners">
+                </div>
+
+                <div>
+                    <label for="classStyle">Dance Style</label>
+                    <input type="text" id="classStyle" list="styleList" placeholder="Example: Salsa">
+                    <datalist id="styleList">
+                        <option value="Hip-Hop">
+                        <option value="Contemporary">
+                        <option value="Bollywood">
+                        <option value="Classical">
+                        <option value="Salsa">
+                    </datalist>
+                </div>
+
+                <div>
+                    <label for="classInstructor">Instructor</label>
+                    <select id="classInstructor">
+                        <option value="">Select Instructor</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="classLevel">Level</label>
+                    <select id="classLevel">
+                        <option value="">Select Level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="classDay">Day</label>
+                    <select id="classDay">
+                        <option value="">Select Day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="classCapacity">Capacity</label>
+                    <input type="number" id="classCapacity" min="1" step="1" placeholder="Example: 20">
+                </div>
+
+                <div>
+                    <label for="classStart">Start Time</label>
+                    <input type="time" id="classStart">
+                </div>
+
+                <div>
+                    <label for="classEnd">End Time</label>
+                    <input type="time" id="classEnd">
+                </div>
+
+                <div class="form-wide">
+                    <label for="classDescription">Description (optional)</label>
+                    <input type="text" id="classDescription" placeholder="Short description of the class">
+                </div>
+
+            </div>
+
+            <button type="button" id="classSubmitButton" onclick="handleSubmitClassForm()">
+                Add Class
+            </button>
+
+            <button type="button" id="classCancelButton" class="btn-secondary" onclick="resetClassForm()" hidden>
+                Cancel Edit
+            </button>
+
+        </div>
+
+
+        <!-- CLASS TABLE -->
+
+        <h3>Existing Classes</h3>
+
+        <div class="toolbar">
+
+            <div>
+                <label for="classSearch">Search</label>
+                <input
+                    type="search"
+                    id="classSearch"
+                    placeholder="Search by class, style, instructor..."
+                    oninput="renderClasses()"
+                >
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Class Name</th>
+                        <th>Style</th>
+                        <th>Level</th>
+                        <th>Instructor</th>
+                        <th>Schedule</th>
+                        <th>Seats</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="adminClassTable">
+                    <!-- JavaScript adds classes here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- REGISTRATIONS -->
+
+    <section id="registrations">
+
+        <h2>Registration Requests</h2>
+
+        <div class="toolbar">
+
+            <div>
+                <label for="registrationSearch">Search</label>
+                <input
+                    type="search"
+                    id="registrationSearch"
+                    placeholder="Search by student, class, instructor..."
+                    oninput="renderRegistrations()"
+                >
+            </div>
+
+            <div>
+                <label for="registrationStatusFilter">Status</label>
+                <select id="registrationStatusFilter" onchange="renderRegistrations()">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Instructor</th>
+                        <th>Request Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="adminRegistrationTable">
+                    <!-- JavaScript adds registrations here -->
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- REPORTS -->
+
+    <section id="reports">
+
+        <h2>Basic Reports</h2>
+
+        <div class="report-card">
+            <h3>Student Statistics</h3>
+            <div id="studentReport"></div>
+        </div>
+
+        <div class="report-card">
+            <h3>Class Statistics</h3>
+            <div id="classReport"></div>
+        </div>
+
+        <div class="report-card">
+            <h3>Registration Statistics</h3>
+            <div id="registrationReport"></div>
+        </div>
+
+        <div class="report-card report-wide">
+            <h3>Class Seat Usage</h3>
+            <div id="usageReport"></div>
+        </div>
+
+    </section>
+
+
+    <!-- NOTIFICATIONS -->
+
+    <section id="notifications">
+
+        <h2>Notifications</h2>
+
+        <div class="notification-list">
+
+            <button type="button" class="btn-small btn-secondary" onclick="handleMarkAllRead()">
+                Mark all as read
+            </button>
+
+            <div id="notificationList">
+                <!-- JavaScript adds notifications here -->
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- EDIT USER DIALOG -->
+
+<dialog id="userDialog">
+
+    <form onsubmit="handleSaveUser(event)">
+
+        <h3>Edit User</h3>
+
+        <div>
+            <label for="editUserEmail">Email</label>
+            <input type="text" id="editUserEmail" disabled>
+        </div>
+
+        <div>
+            <label for="editUserName">Name</label>
+            <input type="text" id="editUserName" required>
+        </div>
+
+        <div>
+            <label for="editUserRole">Role</label>
+            <select id="editUserRole">
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="editUserStatus">Status</label>
+            <select id="editUserStatus">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="Pending">Pending</option>
+            </select>
+        </div>
+
+        <button type="submit">Save Changes</button>
+
+        <button type="button" class="btn-secondary" onclick="closeUserDialog()">
+            Cancel
+        </button>
+
+    </form>
+
+</dialog>
+
+
+<!-- TEMPORARY PASSWORD DIALOG -->
+
+<dialog id="tempPasswordDialog">
+
+    <h3>Password Reset</h3>
+
+    <p>
+        New temporary password for
+        <strong id="tempPasswordUser"></strong>:
+    </p>
+
+    <p class="reset-code" id="tempPasswordValue"></p>
+
+    <p>
+        This is shown only once. Give it to the user and ask them
+        to change it from <strong>Change Password</strong> after logging in.
+    </p>
+
+    <button type="button" onclick="closeTempPasswordDialog()">Done</button>
+
+</dialog>
+
+
+<footer>
+
+    <p>&copy; 2026 Dance Studio Management System</p>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/admin.js"></script>
+
+<script>
+
+    if (protectPage("admin")) {
+
+        initializeAdminDashboard();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
